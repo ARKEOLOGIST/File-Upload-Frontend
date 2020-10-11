@@ -1,0 +1,18 @@
+<div class="row">
+<div class="col-md-4" *ngFor="let datum of data" style="margin: 20px 0;">
+    <div class="card">
+        <div class="card-title text-center">
+            <h4>{{ datum.title }}</h4>
+        </div>
+        <div class="card-body p-0 mx-auto">
+            <div class="col-lg-8">
+                <img [src]="datum.link" style="height: 10rem; width: 10rem; object-fit: cover;">
+            </div>
+        </div>
+        <div class="card-text text-center">
+            <h5>{{ datum.description }}</h5>
+        </div>
+        <button class="btn btn-danger" (click)="deleteCall(datum.id)">Delete</button>
+    </div>
+</div>
+</div>
