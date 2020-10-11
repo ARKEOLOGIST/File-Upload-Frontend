@@ -18,12 +18,9 @@ export class ListComponent implements OnInit {
   show = false;
   constructor(private http: HttpClient) { }
 
-  async ngOnInit() {
-    const wait = this.http.get('http://localhost:5000/fetch').toPromise();
-    wait.then((data) => {
-      this.data = data.values[0];
-      let val = 6;
-      console.log(this.data);
+  ngOnInit(): void {
+    this.http.get('http://localhost:5000/fetch').subscribe((res) => { this.data = res.values[0] });
+    let val = 6;
     if (this.data.length > 6)
     {
       while (val !== 0)
@@ -32,31 +29,22 @@ export class ListComponent implements OnInit {
         this.index++;
         val--;
       }
-    } else {
-      val = this.data.length;
-      while (val !== 0)
-      {
-        this.display.push(this.data[this.index]);
-        this.index++;
-        val--;
-      }
-    } 
-    }).catch((e) => {
-      console.log(e);
-    });
+    }    
 }
 
-showButton() {
-  if (this.data.length <= this.index)
-  {
-    return false;
-  }
-  else {
-    return true;
-  }
+ngAfterViewInit() {
+  this.interval = setInterval(function() {
+    if (this.data.length > 6 && this.index <= this.data.length)
+    {
+      this.display.splice(0,1);
+      this.display.push(this.data[this.index]);
+      this.index++;
+    }  
+  },3000);
 }
 
 openList(event) {
+    event.preventDefault();
     this.show = !this.show;
 }
 
