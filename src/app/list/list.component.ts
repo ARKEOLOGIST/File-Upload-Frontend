@@ -19,7 +19,9 @@ export class ListComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:5000/fetch').subscribe((res) => { this.data = res.values[0];
+    console.log("Entering");
+    this.http.get('http://localhost:5000/fetch').subscribe((res) => { 
+    this.data = res.values[0];
     let val = 6;
     if (this.data.length > 6)
     {
@@ -38,23 +40,23 @@ export class ListComponent implements OnInit {
         val--;
       }
     }  
-    this.afterFunction();
+    this.afterFunction(this.data);
   });
 }
 
-afterFunction() {
+afterFunction(values) {
   this.interval = setInterval(function() {
-    if (this.data.length > 6 && this.index <= this.data.length)
+    if (values.length > 6 && this.index <= values.length)
     {
       this.display.splice(0,1);
-      this.display.push(this.data[this.index]);
+      this.display.push(values[this.index]);
       this.index++;
     }  
   },3000);
 }
 
 showButton() {
-  if (this.data.length < 6) {
+  if (this.data.length <= 6) {
     return false;
   }
   else {
@@ -69,6 +71,6 @@ openList(event) {
 
 deleteCall(id) {
   console.log(id);
-  this.http.post('http://localhost:5000/delete',{ id : id }).subscribe((res) => { console.log(res) });
+  this.http.post('http://localhost:5000/delete',{ id : id }).subscribe((res) => { console.log(res) }).unsubscribe();
 }
 }
