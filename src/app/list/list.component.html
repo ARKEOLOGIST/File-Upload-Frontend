@@ -38,9 +38,6 @@
 <div class="col-md-12 text-center">
     <button (click) = "openList($event)" *ngIf="showButton()"> Queue - {{ data.length - index }} </button>
 </div>
-<div class="col-md-12 text-center">
-    <button (click) = "openList($event)" *ngIf="!showButton()"> Collapse </button>
-</div>
 <div class="col-md-12 text-center" style="padding-top: 70px;">
     <a routerLink="/home"><h1>Upload</h1></a>
 </div>
