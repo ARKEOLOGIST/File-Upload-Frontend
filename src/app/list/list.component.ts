@@ -19,14 +19,11 @@ export class ListComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    console.log("Entering");
     this.http.get('http://localhost:5000/fetch').subscribe((res: any) => { 
     this.data = res.values[0];
-    console.log(res.hasOwnProperty('values'));
     let val = 6;
     if (this.data.length > 6)
     {
-      console.log("if");
       while (val !== 0)
       {
         this.display.push(this.data[this.index]);
@@ -34,9 +31,7 @@ export class ListComponent implements OnInit {
         val--;
       }
     } else {
-      console.log("else");
       val = this.data.length;
-      console.log(val);
       while (val !== 0)
       {
         this.display.push(this.data[this.index]);
@@ -76,6 +71,6 @@ openList(event) {
 
 deleteCall(id) {
   console.log(id);
-  this.http.post('http://localhost:5000/delete',{ id : id }).subscribe((res) => { console.log(res) }).unsubscribe();
+  this.http.post('http://localhost:5000/delete',{ id : id }).subscribe((res: any) => { });
 }
 }
