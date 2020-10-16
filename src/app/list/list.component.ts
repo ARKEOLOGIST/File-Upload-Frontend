@@ -20,11 +20,13 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Entering");
-    this.http.get('http://localhost:5000/fetch').subscribe((res) => { 
+    this.http.get('http://localhost:5000/fetch').subscribe((res: any) => { 
     this.data = res.values[0];
+    console.log(res.hasOwnProperty('values'));
     let val = 6;
     if (this.data.length > 6)
     {
+      console.log("if");
       while (val !== 0)
       {
         this.display.push(this.data[this.index]);
@@ -32,7 +34,9 @@ export class ListComponent implements OnInit {
         val--;
       }
     } else {
+      console.log("else");
       val = this.data.length;
+      console.log(val);
       while (val !== 0)
       {
         this.display.push(this.data[this.index]);
@@ -45,14 +49,15 @@ export class ListComponent implements OnInit {
 }
 
 afterFunction(values) {
+  let f = this;
   this.interval = setInterval(function() {
-    if (values.length > 6 && this.index <= values.length)
+    if (values.length > 6 && f.index < values.length)
     {
-      this.display.splice(0,1);
-      this.display.push(values[this.index]);
-      this.index++;
-    }  
-  },3000);
+      f.display.splice(0,1);
+      f.display.push(values[f.index]);
+      f.index++;
+    } 
+  },30000);
 }
 
 showButton() {

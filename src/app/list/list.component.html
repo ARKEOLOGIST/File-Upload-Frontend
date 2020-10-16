@@ -1,15 +1,12 @@
 <div class="row">
-<div class="row text-center">
-    <a routerLink="/home">List</a>
-</div>
-<div class="row mx-auto" *ngIf="show">
+<div class="row mx-auto" *ngIf="show" style="padding:20px;">
 <div class="col-md-4"  *ngFor="let datum of data" style="margin: 20px 0;">
     <div class="card">
         <div class="card-title text-center">
             <h4>{{ datum.title }}</h4>
         </div>
         <div class="card-body p-0 mx-auto">
-            <div class="col-lg-8">
+            <div class="col-md-8">
                 <img [src]="datum.link" style="height: 10rem; width: 10rem; object-fit: cover;">
             </div>
         </div>
@@ -20,14 +17,14 @@
     </div>
 </div>
 </div>
-<div class="row mx-auto" *ngIf="!show">
+<div class="row mx-auto" *ngIf="!show" style="padding:20px;">
 <div class="col-md-4" *ngFor="let datum of display" style="margin: 20px 0;">
     <div class="card">
         <div class="card-title text-center">
             <h4>{{ datum.title }}</h4>
         </div>
         <div class="card-body p-0 mx-auto">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <img [src]="datum.link" style="height: 10rem; width: 10rem; object-fit: cover;">
             </div>
         </div>
@@ -38,7 +35,13 @@
     </div>
 </div>
 </div>
-<div class="row">
+<div class="col-md-12 text-center">
     <button (click) = "openList($event)" *ngIf="showButton()"> Queue - {{ data.length - index }} </button>
+</div>
+<div class="col-md-12 text-center">
+    <button (click) = "openList($event)" *ngIf="!showButton()"> Collapse </button>
+</div>
+<div class="col-md-12 text-center" style="padding-top: 70px;">
+    <a routerLink="/home"><h1>List</h1></a>
 </div>
 </div>
