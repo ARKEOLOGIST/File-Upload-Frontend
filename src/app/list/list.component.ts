@@ -71,7 +71,7 @@ openList(event) {
 
 deleteCall(id) {
   this.http.get('http://backend/delete.php?id='+id).subscribe((res: any) => { 
-  console.log(res);
+    
   });
 }
 }
