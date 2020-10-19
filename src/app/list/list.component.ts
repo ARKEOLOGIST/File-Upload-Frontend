@@ -19,8 +19,8 @@ export class ListComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:5000/fetch').subscribe((res: any) => { 
-    this.data = res.values[0];
+    this.http.get('http://backend/fetch.php').subscribe((res: any) => { 
+    this.data = res.response;
     let val = 6;
     if (this.data.length > 6)
     {
@@ -70,7 +70,8 @@ openList(event) {
 }
 
 deleteCall(id) {
-  console.log(id);
-  this.http.post('http://localhost:5000/delete',{ id : id }).subscribe((res: any) => { });
+  this.http.get('http://backend/delete.php?id='+id).subscribe((res: any) => { 
+  console.log(res);
+  });
 }
 }

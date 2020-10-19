@@ -40,7 +40,7 @@ export class RegistrationComponent implements OnInit {
     fd.append('image',this.form.value.image);
     fd.append('title',this.form.value.title);
     fd.append('description',this.form.value.description);
-    this.http.post('http://localhost:5000/upload',fd).subscribe(res => console.log(res));
+    this.http.post('http://backend/upload.php',fd).subscribe(res => console.log(res));
     this.form.patchValue({title: '',description: '',image: null});
   }
 }
